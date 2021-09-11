@@ -21,7 +21,7 @@ import SQLite
     @objc optional func swipeDownDismiss()
 }
 
-class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
+open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
     
     open weak var delegate : MRFilteredLocationsDelegate?
 
@@ -29,7 +29,7 @@ class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchR
     private var searchController: UISearchController!
     
     
-    override func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
@@ -55,14 +55,14 @@ class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchR
         tableView.tableHeaderView = searchController.searchBar
     }
     
-    override func viewDidAppear(_ animated: Bool) {
+    open override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
         }
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         searchController.searchBar.barTintColor = .link
         tableView.backgroundColor = .systemGray6
     }
@@ -70,19 +70,19 @@ class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchR
     
     //MARK:- TableView
     
-    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    open override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    open override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredLocation.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "id_table_cell_location", for: indexPath)
         if filteredLocation[indexPath.row].country.count > 0 {
             let text = filteredLocation[indexPath.row].name + ", " + filteredLocation[indexPath.row].country
@@ -96,25 +96,25 @@ class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchR
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectRowAt(tableView: tableView, indexPath: indexPath, filteredLocation: filteredLocation)
     }
     
     
     //MARK:- SearchView
     
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+    open func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
     }
     
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+    open func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.searchBar.text = ""
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
         swipeDownDismiss()
     }
     
-    func updateSearchResults(for searchController: UISearchController) {
+    open func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else {
             filteredLocation = [Location]()
             tableView.reloadData()
