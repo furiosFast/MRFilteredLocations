@@ -16,11 +16,11 @@ import UIKit
 
 public class Location: NSObject {
     
-    let id: Int64
-    let name: String
-    let country: String
-    let latitude: Double
-    let longitude: Double
+    public final let id: Int64
+    public final let name: String
+    public final let country: String
+    public final let latitude: Double
+    public final let longitude: Double
 
     init(_ id: Int64, _ name: String, _ country: String, _ latitude: Double, _ longitude: Double) {
         self.id = id
