@@ -15,7 +15,7 @@
 import UIKit
 import SQLite
 
-open class LocationDao: DataStoreProtocol {
+public class LocationDao: DataStoreProtocol {
     
     static let table = Table("T_LOCATION")
     static let idLocation = Expression<Int64>("ID_LOCATION")
@@ -25,7 +25,7 @@ open class LocationDao: DataStoreProtocol {
     static let longitude = Expression<Double>("LONGITUDE")
     
     
-    static func findById(id: Int64) throws -> Location? {
+    public static func findById(id: Int64) throws -> Location? {
         guard let DB = SQLiteDataStore.shared.BBDB else { return nil }
         
         let query = table.filter(idLocation == id)
@@ -37,7 +37,7 @@ open class LocationDao: DataStoreProtocol {
         return nil
     }
     
-    static func findFirstTwentyLikeByName(name: String) throws -> [Location] {
+    public static func findFirstTwentyLikeByName(name: String) throws -> [Location] {
         guard let DB = SQLiteDataStore.shared.BBDB else { return [] }
         
         var retArray = [Location]()
@@ -50,7 +50,7 @@ open class LocationDao: DataStoreProtocol {
         return retArray
     }
     
-    static func findFirstTwentyLikeByCountry(country: String) throws -> [Location] {
+    public static func findFirstTwentyLikeByCountry(country: String) throws -> [Location] {
         guard let DB = SQLiteDataStore.shared.BBDB else { return [] }
         
         var retArray = [Location]()
@@ -63,7 +63,7 @@ open class LocationDao: DataStoreProtocol {
         return retArray
     }
 
-    static func findAll() throws -> [Location] {
+    public static func findAll() throws -> [Location] {
         guard let DB = SQLiteDataStore.shared.BBDB else { return [] }
         
         var retArray = [Location]()
