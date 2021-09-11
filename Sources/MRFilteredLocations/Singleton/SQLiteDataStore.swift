@@ -31,7 +31,7 @@ class SQLiteDataStore {
     
     private init() {
         do {
-            let sqliteFilePath = Bundle.main.path(forResource: "Locations", ofType: "sqlite")!
+            let sqliteFilePath = Bundle.module.path(forResource: "Locations", ofType: "sqlite")!
             BBDB = try Connection(sqliteFilePath)
         } catch _ {
             BBDB = nil
