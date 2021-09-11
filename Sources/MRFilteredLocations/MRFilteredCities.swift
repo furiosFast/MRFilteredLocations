@@ -18,7 +18,7 @@ import SQLite
 
 @objc public protocol MRFilteredLocationsDelegate: NSObjectProtocol {
     func didSelectRowAt(tableView: UITableView, indexPath: IndexPath, filteredLocation: [Location])
-    @objc optional func swipeDownDismiss()
+    @objc optional func swipeDownDismiss(controller: MRFilteredLocations)
 }
 
 open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
@@ -43,7 +43,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
         searchController.searchBar.cornerRadius = 15
-        //searchController.searchBar.barTintColor = .link
+        searchController.searchBar.barTintColor = .link
         searchController.searchBar.backgroundColor = .systemGray6
         searchController.searchBar.isTranslucent = true
         searchController.searchBar.borderColor = .white
@@ -101,6 +101,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectRowAt(tableView: tableView, indexPath: indexPath, filteredLocation: filteredLocation)
+        delegate?.swipeDownDismiss?(controller: self)
     }
     
     
@@ -144,7 +145,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     //MARK:- Private functions
     
     private func swipeDownDismiss(completion: (() -> Void)? = nil){
-        delegate?.swipeDownDismiss?()
+        delegate?.swipeDownDismiss?(controller: self)
     }
 
 }

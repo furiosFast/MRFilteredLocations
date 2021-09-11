@@ -16,7 +16,7 @@ import UIKit
 
 //MARK: - Shared variables
 
-public let bundleId = "org.fastdevsproject.altervista.MRGpsDataGetter"
+public let bundleId = "org.fastdevsproject.altervista.MRFilteredLocations"
 public let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
 public let copyright = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
 public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
