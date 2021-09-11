@@ -16,14 +16,14 @@ import UIKit
 
 public class Location: NSObject {
     
-    public final let id: Int64
+    public final let idLocation: Int64
     public final let name: String
     public final let country: String
     public final let latitude: Double
     public final let longitude: Double
 
-    init(_ id: Int64, _ name: String, _ country: String, _ latitude: Double, _ longitude: Double) {
-        self.id = id
+    init(_ idLocation: Int64, _ name: String, _ country: String, _ latitude: Double, _ longitude: Double) {
+        self.idLocation = idLocation
         self.name = name
         self.country = country
         self.latitude = latitude
@@ -31,7 +31,7 @@ public class Location: NSObject {
     }
     
     internal required init?(coder aDecoder: NSCoder) {
-        self.id = aDecoder.decodeObject(forKey: "id") as! Int64
+        self.idLocation = aDecoder.decodeObject(forKey: "idLocation") as! Int64
         self.name = aDecoder.decodeObject(forKey: "name") as! String
         self.country = aDecoder.decodeObject(forKey: "country") as! String
         self.latitude = aDecoder.decodeObject(forKey: "latitude") as! Double
@@ -39,7 +39,7 @@ public class Location: NSObject {
     }
     
     func encode(with encoder: NSCoder) {
-        encoder.encode(self.id, forKey: "id")
+        encoder.encode(self.idLocation, forKey: "idLocation")
         encoder.encode(self.name, forKey: "name")
         encoder.encode(self.country, forKey: "country")
         encoder.encode(self.latitude, forKey: "latitude")
