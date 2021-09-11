@@ -41,7 +41,7 @@ public class LocationDao: DataStoreProtocol {
         guard let DB = SQLiteDataStore.shared.BBDB else { return [] }
         
         var retArray = [Location]()
-        let query = table.filter(self.name.lowercaseString.like(name.lowercased())).limit(20).group([country, self.name]).order([country, self.name])
+        let query = table.filter(self.name.lowercaseString.like("%"+name.lowercased()+"%")).limit(20).group([country, self.name]).order([country, self.name])
         let items = try DB.prepare(query)
         for item in items {
             retArray.append(Location(item[idLocation], item[self.name], item[country], item[latitude], item[longitude]))
@@ -54,7 +54,7 @@ public class LocationDao: DataStoreProtocol {
         guard let DB = SQLiteDataStore.shared.BBDB else { return [] }
         
         var retArray = [Location]()
-        let query = table.filter(self.country.lowercaseString.like(country.lowercased())).limit(20).group([self.country, name]).order([self.country, name])
+        let query = table.filter(self.country.lowercaseString.like("%"+country.lowercased()+"%")).limit(20).group([self.country, name]).order([self.country, name])
         let items = try DB.prepare(query)
         for item in items {
             retArray.append(Location(item[idLocation], item[name], item[self.country], item[latitude], item[longitude]))
