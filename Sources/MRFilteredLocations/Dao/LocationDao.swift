@@ -15,7 +15,7 @@
 import UIKit
 import SQLite
 
-class LocationDao: DataStoreProtocol {
+open class LocationDao: DataStoreProtocol {
     
     static let table = Table("T_LOCATION")
     static let idLocation = Expression<Int64>("ID_LOCATION")

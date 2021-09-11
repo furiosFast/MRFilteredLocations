@@ -33,7 +33,8 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id_table_cell_location")
+
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
