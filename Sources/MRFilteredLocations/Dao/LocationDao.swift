@@ -50,11 +50,11 @@ public class LocationDao: DataStoreProtocol {
         return retArray
     }
     
-    public static func findFirstTwentyLikeByCountry(country: String) throws -> [Location] {
+    public static func findAllLikeByCountry(country: String) throws -> [Location] {
         guard let DB = SQLiteDataStore.shared.BBDB else { return [] }
         
         var retArray = [Location]()
-        let query = table.filter(self.country.lowercaseString.like("%"+country.lowercased()+"%")).limit(20).group([self.country, name]).order([self.country, name])
+        let query = table.filter(self.country.lowercaseString.like("%"+country.lowercased()+"%")).group([self.country, name]).order([self.country, name])
         let items = try DB.prepare(query)
         for item in items {
             retArray.append(Location(item[idLocation], item[name], item[self.country], item[latitude], item[longitude]))

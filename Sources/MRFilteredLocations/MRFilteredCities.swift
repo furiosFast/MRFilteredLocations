@@ -34,6 +34,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
         tableView.dataSource = self
         tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "id_table_cell_location")
+        tableView.backgroundColor = UIColor(named: "Table View Backgound Custom Color")
 
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -42,7 +43,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
         searchController.searchBar.cornerRadius = 15
-        searchController.searchBar.barTintColor = .link
+        //searchController.searchBar.barTintColor = .link
         searchController.searchBar.backgroundColor = .systemGray6
         searchController.searchBar.isTranslucent = true
         searchController.searchBar.borderColor = .white
@@ -85,6 +86,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "id_table_cell_location", for: indexPath)
+        cell.backgroundColor = colorFromBundle(named: "Table View Cell Backgound Custom Color")
         if filteredLocation[indexPath.row].country.count > 0 {
             let text = filteredLocation[indexPath.row].name + ", " + filteredLocation[indexPath.row].country
             let amountText = NSMutableAttributedString.init(string: text)

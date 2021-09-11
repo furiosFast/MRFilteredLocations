@@ -37,6 +37,12 @@ public func imgFromBundle(named: String) -> UIImage? {
     return UIImage(named: named, in: .module, with: nil)
 }
 
+/// Public function for get an image from this Bundle
+/// - Parameter named: image name
+public func colorFromBundle(named: String) -> UIColor? {
+    return UIColor(named: named, in: .module, compatibleWith: nil)
+}
+
 /// Short function for localize string
 /// - Parameter localizedKey: string key to localize
 func loc(_ localizedKey: String) -> String {
