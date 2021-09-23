@@ -101,7 +101,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelectRowAt(tableView: tableView, indexPath: indexPath, filteredLocation: filteredLocation)
-        searchController.isActive = false;
+        //searchController.isActive = false;
         searchController.searchBar.resignFirstResponder()
         delegate?.swipeDownDismiss?(controller: self)
     }
