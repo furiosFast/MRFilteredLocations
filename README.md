@@ -25,7 +25,7 @@ Once you have your Swift package set up, adding MRFilteredLocations as a depende
 
 ```swift
 dependencies: [
-.package(url: "https://github.com/furiosFast/MRFilteredLocations.git", from: "1.0.0")
+    .package(url: "https://github.com/furiosFast/MRFilteredLocations.git", from: "1.0.0")
 ]
 ```
 
