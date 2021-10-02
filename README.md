@@ -70,8 +70,6 @@ MRFilteredLocations has different dependencies and therefore needs the following
 
 It isn't necessary to add the dependencies of MRFilteredLocations, becose with SPM all is do automatically!
 
-There files are already included into the framework.
-
 ## License
 
 MRFilteredLocations is released under the MIT license. See [LICENSE](https://github.com/furiosFast/MRFilteredLocations/blob/master/LICENSE) for more information.
