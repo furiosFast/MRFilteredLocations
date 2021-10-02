@@ -69,13 +69,35 @@ $ git submodule add https://github.com/furiosfast/MRFilteredLocations.git
 
 ```swift
 import MRFilteredLocations
+
+class ViewController: UIViewController, MRFilteredLocationsDelegate {
+
+    //MARK:- Delegates
+
+    func didSelectRowAt(tableView: UITableView, indexPath: IndexPath, filteredLocation: [Location]) {
+        let sl = filteredLocation[indexPath.row]
+        ...
+    }
+
+    func swipeDownDismiss(controller: MRFilteredLocations) {
+        controller.navigationController?.popViewController()
+    }
+    
+    
+    //MARK:- IBActions
+    @IBAction func searchLocationForecast(_ sender: Any) {
+        let searchVC = MRFilteredLocations()
+        searchVC.delegate = self
+        self.navigationController?.pushViewController(searchVC, animated: true)
+    }
+
+}
 ```
 
 ## Requirements
 
 MRFilteredLocations has different dependencies and therefore needs the following libraries (also available via SPM):
 - [SQLite.swift](https://github.com/stephencelis/SQLite.swift.git) 0.13.0
-- [SwifterSwift](https://github.com/SwifterSwift/SwifterSwift) 5.1.0+
 
 It isn't necessary to add the dependencies of MRFilteredLocations, becose with SPM all is do automatically!
 

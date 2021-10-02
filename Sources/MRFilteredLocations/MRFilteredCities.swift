@@ -13,7 +13,6 @@
 
 
 import UIKit
-import SwifterSwift
 import SQLite
 
 @objc public protocol MRFilteredLocationsDelegate: NSObjectProtocol {
@@ -42,11 +41,11 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
         searchController.searchBar.placeholder = loc("searchPage_PLACEHOLDER")
         searchController.searchBar.delegate = self
         searchController.searchBar.sizeToFit()
-        searchController.searchBar.cornerRadius = 15
+        searchController.searchBar.layer.cornerRadius = 15
         searchController.searchBar.barTintColor = .link
         searchController.searchBar.backgroundColor = .systemGray6
         searchController.searchBar.isTranslucent = true
-        searchController.searchBar.borderColor = .white
+        searchController.searchBar.layer.borderColor = UIColor.white.cgColor
         searchController.searchBar.searchBarStyle = .minimal
         searchController.searchBar.keyboardAppearance = .dark
         searchController.searchBar.returnKeyType = .search

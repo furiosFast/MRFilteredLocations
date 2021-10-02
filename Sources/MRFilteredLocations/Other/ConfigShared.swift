@@ -14,15 +14,6 @@
 import UIKit
 
 
-//MARK: - Shared variables
-
-public let bundleId = "org.fastdevsproject.altervista.MRFilteredLocations"
-public let appVersionNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as! String
-public let copyright = Bundle.main.object(forInfoDictionaryKey: "NSHumanReadableCopyright") as! String
-public let appBuildNumber = Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as! String
-public let hexAppBuildNumber = String(appBuildNumber.int!, radix: 16, uppercase: true)
-
-
 //MARK: - Shared functions
 
 /// Public function for get localized string from this Bundle
