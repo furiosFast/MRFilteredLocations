@@ -9,6 +9,8 @@
 
 Easy way to search a location (offline DB) in a simple UITableViewController
 
+<img src="https://github.com/furiosFast/MRFilteredLocations/blob/master/Assets/screen.gif?raw=true">
+
 ## Requirements
 
 - iOS 13.0+
