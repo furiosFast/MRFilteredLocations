@@ -9,9 +9,9 @@
 
 Easy way to search a location (offline DB) in a simple UITableViewController
 
-<center>
+<p align="center" width="100%">
     <img src="https://github.com/furiosFast/MRFilteredLocations/blob/master/Assets/screen.gif?raw=true">
-</center>
+</p>
     
 ## Requirements
 
