@@ -69,7 +69,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     }
     
     
-    //MARK:- TableView
+    //MARK: - TableView
     
     open override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
@@ -106,7 +106,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     }
     
     
-    //MARK:- SearchView
+    //MARK: - SearchView
     
     open func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
@@ -143,7 +143,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     }
     
     
-    //MARK:- Private functions
+    //MARK: - Private functions
     
     private func swipeDownDismiss(completion: (() -> Void)? = nil){
         delegate?.swipeDownDismiss?(controller: self)
