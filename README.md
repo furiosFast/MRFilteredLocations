@@ -46,7 +46,7 @@ import MRFilteredLocations
 
 class ViewController: UIViewController, MRFilteredLocationsDelegate {
 
-    //MARK:- Delegates
+    //MARK: - Delegates
     func didSelectRowAt(tableView: UITableView, indexPath: IndexPath, filteredLocation: [Location]) {
         let sl = filteredLocation[indexPath.row]
         ...
@@ -57,7 +57,7 @@ class ViewController: UIViewController, MRFilteredLocationsDelegate {
     }
     
     
-    //MARK:- IBActions
+    //MARK: - IBActions
     @IBAction func searchLocationForecast(_ sender: Any) {
         let searchVC = MRFilteredLocations()
         searchVC.delegate = self
