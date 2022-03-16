@@ -16,7 +16,7 @@ import UIKit
 import SQLite
 
 @objc public protocol MRFilteredLocationsDelegate: NSObjectProtocol {
-    func didSelectRowAt(tableView: UITableView, indexPath: IndexPath, filteredLocation: [Location])
+    func didSelect(filteredLocation: Location)
     @objc optional func swipeDownDismiss(controller: MRFilteredLocations)
 }
 
@@ -24,7 +24,7 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     
     open weak var delegate : MRFilteredLocationsDelegate?
 
-    private var filteredLocation: [Location] = []
+    private var filteredLocations: [Location] = []
     private var searchController: UISearchController!
     
     
@@ -80,26 +80,26 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     }
     
     open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return filteredLocation.count
+        return filteredLocations.count
     }
     
     open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "id_table_cell_location", for: indexPath)
         cell.backgroundColor = colorFromBundle(named: "Table View Cell Backgound Custom Color")
-        if filteredLocation[indexPath.row].country.count > 0 {
-            let text = filteredLocation[indexPath.row].name + ", " + filteredLocation[indexPath.row].country
+        if filteredLocations[indexPath.row].country.count > 0 {
+            let text = filteredLocations[indexPath.row].name + ", " + filteredLocations[indexPath.row].country
             let amountText = NSMutableAttributedString.init(string: text)
             amountText.setAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray],
-                                     range: NSMakeRange(filteredLocation[indexPath.row].name.count + 2, filteredLocation[indexPath.row].country.count))
+                                     range: NSMakeRange(filteredLocations[indexPath.row].name.count + 2, filteredLocations[indexPath.row].country.count))
             cell.textLabel?.attributedText = amountText
         } else {
-            cell.textLabel?.text = filteredLocation[indexPath.row].name
+            cell.textLabel?.text = filteredLocations[indexPath.row].name
         }
         return cell
     }
     
     open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.didSelectRowAt(tableView: tableView, indexPath: indexPath, filteredLocation: filteredLocation)
+        delegate?.didSelect(filteredLocation: filteredLocations[indexPath.row])
         //searchController.isActive = false;
         searchController.searchBar.resignFirstResponder()
         delegate?.swipeDownDismiss?(controller: self)
@@ -121,20 +121,20 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
     
     open func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else {
-            filteredLocation = [Location]()
+            filteredLocations = [Location]()
             tableView.reloadData()
             return
         }
         if searchText.isEmpty {
-            filteredLocation = [Location]()
+            filteredLocations = [Location]()
             tableView.reloadData()
             return
         }
         DispatchQueue.global().async {
             do {
-                self.filteredLocation = try LocationDao.findFirstTwentyLikeByName(name: searchText)
+                self.filteredLocations = try LocationDao.findFirstTwentyLikeByName(name: searchText)
             } catch {
-                debugPrint("ERROR: in fase di riperimento dei dati dal dao")
+                debugPrint("ERROR: in fetch data from dao")
             }
             DispatchQueue.main.async {
                 self.tableView.reloadData()
