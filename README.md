@@ -42,13 +42,14 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 ### Initialization
 
 ```swift
+import CoreLocation
 import MRFilteredLocations
 
 class ViewController: UIViewController, MRFilteredLocationsDelegate {
 
     //MARK: - Delegates
-    func didSelectRowAt(tableView: UITableView, indexPath: IndexPath, filteredLocation: [Location]) {
-        let sl = filteredLocation[indexPath.row]
+    func didSelect(filteredLocation: Location) {
+        let sl = CLLocation(latitude: filteredLocation.latitude, longitude: filteredLocation.longitude)
         ...
     }
 
