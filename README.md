@@ -39,7 +39,7 @@ If you prefer not to use any of the aforementioned dependency managers, you can 
 
 ## Usage
 
-### Initialization
+### Example
 
 ```swift
 import CoreLocation
