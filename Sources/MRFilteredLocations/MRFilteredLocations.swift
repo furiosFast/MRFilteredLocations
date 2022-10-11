@@ -11,9 +11,8 @@
 //  Copyright © 2021 Fast-Devs Project. All rights reserved.
 //
 
-
-import UIKit
 import SQLite
+import UIKit
 
 @objc public protocol MRFilteredLocationsDelegate: NSObjectProtocol {
     func didSelect(filteredLocation: Location)
@@ -21,14 +20,12 @@ import SQLite
 }
 
 open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISearchResultsUpdating {
-    
-    open weak var delegate : MRFilteredLocationsDelegate?
+    open weak var delegate: MRFilteredLocationsDelegate?
 
     private var filteredLocations: [Location] = []
     private var searchController: UISearchController!
-    
-    
-    open override func viewDidLoad() {
+
+    override open func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
@@ -51,44 +48,43 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
         searchController.searchBar.returnKeyType = .search
         searchController.searchBar.keyboardType = .alphabet
         searchController.searchBar.autocorrectionType = .yes
-        
+
         definesPresentationContext = true
         tableView.tableHeaderView = searchController.searchBar
     }
-    
-    open override func viewDidAppear(_ animated: Bool) {
+
+    override open func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         DispatchQueue.main.async {
             self.searchController.searchBar.becomeFirstResponder()
         }
     }
-    
-    open override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+
+    override open func traitCollectionDidChange(_: UITraitCollection?) {
         searchController.searchBar.barTintColor = .link
         tableView.backgroundColor = .systemGray6
     }
-    
-    
-    //MARK: - TableView
-    
-    open override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+
+    // MARK: - TableView
+
+    override open func tableView(_: UITableView, heightForHeaderInSection _: Int) -> CGFloat {
         return CGFloat.leastNormalMagnitude
     }
-    
-    open override func numberOfSections(in tableView: UITableView) -> Int {
+
+    override open func numberOfSections(in _: UITableView) -> Int {
         return 1
     }
-    
-    open override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+
+    override open func tableView(_: UITableView, numberOfRowsInSection _: Int) -> Int {
         return filteredLocations.count
     }
-    
-    open override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+    override open func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "id_table_cell_location", for: indexPath)
         cell.backgroundColor = colorFromBundle(named: "Table View Cell Backgound Custom Color")
         if filteredLocations[indexPath.row].country.count > 0 {
             let text = filteredLocations[indexPath.row].name + ", " + filteredLocations[indexPath.row].country
-            let amountText = NSMutableAttributedString.init(string: text)
+            let amountText = NSMutableAttributedString(string: text)
             amountText.setAttributes([NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13), NSAttributedString.Key.foregroundColor: UIColor.gray],
                                      range: NSMakeRange(filteredLocations[indexPath.row].name.count + 2, filteredLocations[indexPath.row].country.count))
             cell.textLabel?.attributedText = amountText
@@ -97,28 +93,27 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
         }
         return cell
     }
-    
-    open override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+    override open func tableView(_: UITableView, didSelectRowAt indexPath: IndexPath) {
         delegate?.didSelect(filteredLocation: filteredLocations[indexPath.row])
-        //searchController.isActive = false;
+        // searchController.isActive = false;
         searchController.searchBar.resignFirstResponder()
         delegate?.swipeDownDismiss?(controller: self)
     }
-    
-    
-    //MARK: - SearchView
-    
+
+    // MARK: - SearchView
+
     open func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = true
     }
-    
+
     open func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchController.searchBar.text = ""
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
         swipeDownDismiss()
     }
-    
+
     open func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else {
             filteredLocations = [Location]()
@@ -141,12 +136,10 @@ open class MRFilteredLocations: UITableViewController, UISearchBarDelegate, UISe
             }
         }
     }
-    
-    
-    //MARK: - Private functions
-    
-    private func swipeDownDismiss(completion: (() -> Void)? = nil){
+
+    // MARK: - Private functions
+
+    private func swipeDownDismiss(completion _: (() -> Void)? = nil) {
         delegate?.swipeDownDismiss?(controller: self)
     }
-
 }
